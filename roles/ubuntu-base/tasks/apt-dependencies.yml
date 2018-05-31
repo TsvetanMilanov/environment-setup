@@ -1,0 +1,33 @@
+- name: Install base packages
+  apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    - name: ack-grep
+    - name: curl
+    - name: build-essential
+    - name: python-dev
+    - name: python3-dev
+    - name: libxml2-dev
+    - name: libxslt-dev
+    - name: cmake
+    - name: silversearcher-ag
+    - name: tree
+    - name: vim
+    - name: software-properties-common
+    - name: python-software-properties
+    - name: git
+  tags:
+    - apt-deps
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+  tags:
+    - apt-deps
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  tags:
+    - apt-deps

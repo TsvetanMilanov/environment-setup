@@ -1,0 +1,13 @@
+- name: Add .bash_profile
+  copy:
+    src: ../files/.bash_profile
+    dest: ~/.bash_profile
+  tags:
+    - ubuntu-terminal
+
+- name: Load .bash_profile
+  lineinfile:
+    path: ~/.bashrc
+    line: source $HOME/.bash_profile
+  tags:
+    - ubuntu-terminal
