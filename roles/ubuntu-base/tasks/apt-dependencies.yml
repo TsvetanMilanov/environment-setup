@@ -2,6 +2,7 @@
   apt:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
+  become: true
   with_items:
     - name: ack-grep
     - name: curl
@@ -17,17 +18,11 @@
     - name: software-properties-common
     - name: python-software-properties
     - name: git
-  tags:
-    - apt-deps
 
 - name: Remove useless packages from the cache
   apt:
     autoclean: yes
-  tags:
-    - apt-deps
 
 - name: Remove dependencies that are no longer required
   apt:
     autoremove: yes
-  tags:
-    - apt-deps

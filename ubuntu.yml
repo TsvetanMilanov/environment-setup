@@ -1,3 +1,11 @@
 - hosts: all
   roles:
     - ubuntu-base
+  tags:
+    - ubuntu-base
+
+- hosts: all
+  roles:
+    - ubuntu-development
+  tags:
+    - ubuntu-development

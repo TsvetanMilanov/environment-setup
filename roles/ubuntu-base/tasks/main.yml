@@ -1,2 +1,7 @@
 - include: apt-dependencies.yml
+  tags:
+    - apt-deps
+
 - include: terminal.yml
+  tags:
+    - ubuntu-terminal

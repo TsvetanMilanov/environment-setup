@@ -1,0 +1,12 @@
+- name: Setup NodeJS
+  command: "bash -c 'curl -sL https://deb.nodesource.com/setup_{{ nodejs_version }} | bash -'"
+  become: true
+  tags:
+    - nodejs
+
+- name: Install NodeJS
+  apt:
+    name: nodejs
+  become: true
+  tags:
+    - nodejs

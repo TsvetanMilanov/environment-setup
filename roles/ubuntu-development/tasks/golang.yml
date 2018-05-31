@@ -1,0 +1,52 @@
+- include_vars:
+    file: "../ubuntu-base/vars/main.yml"
+
+- name: Setup Golang apt repos
+  apt_repository:
+    repo: ppa:gophers/archive
+    state: present
+  become: true
+
+- name: Install Golang
+  apt:
+    name: "golang-{{ golang_version }}-go"
+  become: true
+
+- name: Ensure GOPATH exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/go/{{ item }}"
+    state: directory
+  with_items:
+    - src/github.com
+    - bin
+    - pkg
+
+- name: Configure Golang in .bash_profile
+  lineinfile:
+    path: "{{ bash_profile_path }}"
+    line: "{{ item }}"
+  with_items:
+    - "export GOPATH=$HOME/go"
+    - "export PATH=$PATH:/usr/lib/go-{{ golang_version }}/bin"
+    - "export PATH=$PATH:$GOPATH/bin"
+
+- name: Add Golang aliases
+  lineinfile:
+    path: "{{ bash_aliases_path }}"
+    line: "{{ item }}"
+  with_items:
+    - "alias cdgo='cd $GOPATH/src/github.com'"
+    - "alias egp='echo \"Changing GOPATH...\" && export GOPATH=$PWD && pgp'"
+    - "alias egpup='echo \"Changing GOPATH...\" && export GOPATH=$PWD/../../.. && pgp'"
+    - "alias pgp='echo \"Current GOPATH => $GOPATH\"'"
+
+- name: Golang tools stats
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/go/src/golang.org/x/tools"
+  register: golang_tools_stat
+
+- name: Install Golang tools
+  shell:
+    cmd: "source {{ bash_profile_path }} && go get -u golang.org/x/tools/..."
+    executable: /bin/bash
+  when: not golang_tools_stat.stat.exists

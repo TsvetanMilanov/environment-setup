@@ -1,13 +1,17 @@
 - name: Add .bash_profile
   copy:
     src: ../files/.bash_profile
-    dest: ~/.bash_profile
-  tags:
-    - ubuntu-terminal
+    dest: "{{ bash_profile_path }}"
 
-- name: Load .bash_profile
-  lineinfile:
-    path: ~/.bashrc
-    line: source $HOME/.bash_profile
-  tags:
-    - ubuntu-terminal
+- name: Add .bash_aliases
+  copy:
+    src: ../files/.bash_aliases
+    dest: "{{ bash_aliases_path }}"
+
+- name: Load .bash_profile in .bashrc
+  blockinfile:
+    path: "{{ bashrc_path }}"
+    block: |
+      if [ -f {{ bash_profile_path }} ]; then
+        . {{ bash_profile_path }}
+      fi
