@@ -3,3 +3,6 @@
 
 - include: golang.yml
   tags: golang
+
+- include: vscode.yml
+  tags: vscode

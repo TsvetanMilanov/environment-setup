@@ -1,0 +1,40 @@
+- name: Check if VSCode is installed
+  shell: dpkg -l code || echo true
+  register: should_install_vs_code_cmd
+
+- name: Download VSCode .deb
+  get_url:
+    url: "{{ vs_code_deb_download_url }}"
+    dest: "{{ vs_code_deb_dest }}"
+  when: should_install_vs_code_cmd.stdout == 'true'
+
+- name: Install VSCode
+  apt:
+    deb: "{{ vs_code_deb_dest }}"
+    force: true
+  when: should_install_vs_code_cmd.stdout == 'true'
+  become: true
+
+- name: Install VSCode install extension required libs
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libgtk2.0-0
+    - libxss1
+    - libasound2
+  when: should_install_vs_code_cmd.stdout == 'true'
+  become: true
+
+- name: Install VSCode extensions
+  shell: "code --user-data-dir=$HOME/.config/Code --install-extension {{ item }}"
+  with_items:
+    - ms-vscode.Go
+    - ms-vscode.cpptools
+    - PeterJausovec.vscode-docker
+    - bungcip.better-toml
+    - erd0s.terraform-autocomplete
+    - mauve.terraform
+    - mindginative.terraform-snippets
+    - vscoss.vscode-ansible
+  when: should_install_vs_code_cmd.stdout == 'true'
