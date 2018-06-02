@@ -1,4 +1,17 @@
+# NodeJS
 nodejs_version: "10.x"
+
+# Golang
 golang_version: "1.10"
-vs_code_deb_download_url: "https://go.microsoft.com/fwlink/?LinkID=760868"
+
+# Visual Studio Code
+vs_code_deb_download_url: "https://go.microsoft.com/fwlink/?LinkID:760868"
 vs_code_deb_dest: /tmp/vs_code.deb
+
+# Vim
+vim_root: "{{ lookup('env', 'HOME') }}/.vim"
+vimrc: "{{ vim_root }}/vimrc"
+vim_bundle: "{{ vim_root }}/bundle"
+vim_autoload: "{{ vim_root }}/autoload"
+vim_autoload_pathogen_vim: "{{ vim_autoload }}/pathogen.vim"
+vim_pathogen_download_url: "https://tpo.pe/pathogen.vim"

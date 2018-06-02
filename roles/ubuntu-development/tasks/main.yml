@@ -6,3 +6,6 @@
 
 - include: vscode.yml
   tags: vscode
+
+- include: vim.yml
+  tags: vim

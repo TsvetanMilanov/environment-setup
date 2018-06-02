@@ -1,0 +1,85 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+filetype plugin on
+" Setup vim
+" plugins expect bash - not fish, zsh, etc
+set shell=bash
+set encoding=utf-8
+set number
+
+" Always show status line
+set laststatus=2
+
+" Disable autocomplete preview window
+set completeopt=menuone
+
+let pathogen_disabled = []
+
+" startup tasks
+" autocmd VimEnter * NERDTreeToggle
+
+set omnifunc=syntaxcomplete#Complete
+
+" ctrlip.vim
+let g:ctrlp_working_path_mode = 'ra'
+
+" NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" vim-go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+
+" terraform-vim
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+" mappings
+map g<F12> :tab split<CR>  :GoDef<CR>
+map gb :GoBuild<CR>
+map <C-e> :NERDTreeToggle<CR>
+map <C-k> :tabprevious<CR>
+map <C-l> :tabnext<CR>
+map <C-t> :tabnew<CR>
+
+" NERDComment
+let g:NERDSpaceDelims = 1
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+set ttimeoutlen=50
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" vim-airline-themes
+let g:airline_theme='light'

@@ -1,0 +1,63 @@
+- include_vars:
+    file: "../ubuntu-base/vars/main.yml"
+
+- name: Setup Vim config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ vim_autoload }}"
+    - "{{ vim_bundle }}"
+
+- name: Check if Pathogen is installed
+  stat:
+    path: "{{ vim_autoload_pathogen_vim }}"
+  register: vim_autoload_pathogen
+
+- name: Install Pathogen
+  get_url:
+    url: "{{ vim_pathogen_download_url }}"
+    dest: "{{ vim_autoload_pathogen_vim }}"
+  when: not vim_autoload_pathogen.stat.exists
+
+- name: Install Vim plugins
+  vim_plugin:
+    plugin: "{{ item }}"
+    plugins_dir: "{{ vim_bundle }}"
+  with_items:
+    - jiangmiao/auto-pairs
+    - scrooloose/nerdtree
+    - scrooloose/syntastic
+    - kien/ctrlp.vim
+    - leafgarland/typescript-vim
+    - pangloss/vim-javascript
+    - modille/groovy.vim
+    - vim-scripts/groovyindent
+    - martinda/Jenkinsfile-vim-syntax
+    - fatih/vim-go
+    - ekalinin/Dockerfile.vim
+    - powerline/fonts
+    - scrooloose/nerdcommenter
+    - vim-airline/vim-airline
+    - vim-airline/vim-airline-themes
+    - tpope/vim-fugitive
+    - hashivim/vim-terraform
+
+- name: Install YouCompleteMe
+  vim_plugin:
+    plugin: Valloric/YouCompleteMe
+    plugins_dir: "{{ vim_bundle }}"
+  register: yocompleteme
+
+- name: Setup YouCompleteMe
+  shell:
+    cmd: "source {{ bash_profile_path }} && cd {{ vim_bundle }}/YouCompleteMe && \
+      git submodule update --init --recursive && \
+      ./install.py --clang-completer --go-completer --js-completer"
+    executable: /bin/bash
+  when: yocompleteme.changed
+
+- name: Add vimrc
+  copy:
+    src: ../files/vimrc
+    dest: "{{ vimrc }}"
