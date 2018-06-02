@@ -5,7 +5,7 @@ nodejs_version: "10.x"
 golang_version: "1.10"
 
 # Visual Studio Code
-vs_code_deb_download_url: "https://go.microsoft.com/fwlink/?LinkID:760868"
+vs_code_deb_download_url: "https://go.microsoft.com/fwlink/?LinkID=760868"
 vs_code_deb_dest: /tmp/vs_code.deb
 
 # Vim
