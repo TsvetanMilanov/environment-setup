@@ -1,3 +1,6 @@
+- include_vars:
+    file: "../../vars/main.yml"
+
 - name: Check if should download KeePass
   stat:
     path: "{{ keepass_executable }}"
