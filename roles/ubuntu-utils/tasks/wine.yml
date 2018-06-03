@@ -25,7 +25,9 @@
   when: should_install_wine.stdout == 'true'
 
 - name: Check if should download Winetricks
-  shell: "(. {{ bash_profile_path }} && which winetricks) || echo true"
+  shell:
+    cmd: "(source {{ bash_profile_path }} && which winetricks) || echo true"
+    executable: /bin/bash
   register: should_download_winetricks
 
 - name: Download Winetricks
@@ -41,15 +43,25 @@
     state: present
 
 - name: Check if should install .NET Framework 4.5.2
-  shell: "(. {{ bash_profile_path }} && winetricks list-installed | grep dotnet452) || echo true"
+  shell:
+    cmd: "(source {{ bash_profile_path }} && winetricks list-installed | grep dotnet452) || echo true"
+    executable: /bin/bash
   register: should_install_dotnet452
 
 - name: Install .NET Framework 4.5.2
-  shell: ". {{ bash_profile_path }} && winetricks dotnet452"
+  shell:
+    cmd: "source {{ bash_profile_path }} && winetricks dotnet452"
+    executable: /bin/bash
+  when: should_install_dotnet452.stdout == 'true'
 
 - name: Check if should install corefonts
-  shell: "(. {{ bash_profile_path }} && winetricks list-installed | grep corefonts) || echo true"
+  shell:
+    cmd: "(source {{ bash_profile_path }} && winetricks list-installed | grep corefonts) || echo true"
+    executable: /bin/bash
   register: should_install_corefonts
 
 - name: Install corefonts
-  shell: ". {{ bash_profile_path }} && winetricks corefonts"
+  shell:
+    cmd: "source {{ bash_profile_path }} && winetricks corefonts"
+    executable: /bin/bash
+  when: should_install_dotnet452 == 'true'
