@@ -1,0 +1,2 @@
+- include: google-chrome.yml
+  tags: google-chrome

@@ -1,0 +1,16 @@
+- name: Check if should install Google Chrome
+  shell: which google-chrome || echo true
+  register: should_install_google_chrome
+
+- name: Download Google Chrome
+  get_url:
+    url: "{{ google_chrome_dl_url }}"
+    dest: "{{ google_chrome_dl_destination }}"
+  when: should_install_google_chrome.stdout == 'true'
+
+- name: Install Google Chrome
+  apt:
+    deb: "{{ google_chrome_dl_destination }}"
+    force: true
+  become: true
+  when: should_install_google_chrome.stdout == 'true'

@@ -9,3 +9,9 @@
     - ubuntu-development
   tags:
     - ubuntu-development
+
+- hosts: all
+  roles:
+    - ubuntu-utils
+  tags:
+    - ubuntu-utils
