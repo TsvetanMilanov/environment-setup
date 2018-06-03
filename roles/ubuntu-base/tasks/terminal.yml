@@ -1,3 +1,6 @@
+- include_vars:
+    file: "../../vars/main.yml"
+
 - name: Add .bash_profile
   copy:
     src: ../files/.bash_profile

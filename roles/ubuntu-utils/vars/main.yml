@@ -14,4 +14,3 @@ winetricks_path: "{{ custom_bin_dir }}/winetricks"
 keepass_dir: "{{ custom_programs_dir }}/keepass"
 keepass_executable: "{{ custom_programs_dir }}/keepass/KeePass.exe"
 keepass_dl_url: https://datapacket.dl.sourceforge.net/project/keepass/KeePass%202.x/2.39.1/KeePass-2.39.1.zip
-
