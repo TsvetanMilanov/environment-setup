@@ -1,3 +1,6 @@
+- include_vars:
+    file: "../ubuntu-base/vars/main.yml"
+
 - name: Check if should install Wine
   shell: which wine || echo true
   register: should_install_wine
@@ -20,3 +23,33 @@
     update_cache: true
   become: true
   when: should_install_wine.stdout == 'true'
+
+- name: Check if should download Winetricks
+  shell: "(. {{ bash_profile_path }} && which winetricks) || echo true"
+  register: should_download_winetricks
+
+- name: Download Winetricks
+  get_url:
+    url: "{{ winetricks_dl_url }}"
+    dest: "{{ winetricks_path }}"
+    mode: 0744
+  when: should_download_winetricks.stdout == 'true'
+
+- name: Install cabextract
+  apt:
+    name: cabextract
+    state: present
+
+- name: Check if should install .NET Framework 4.5.2
+  shell: "(. {{ bash_profile_path }} && winetricks list-installed | grep dotnet452) || echo true"
+  register: should_install_dotnet452
+
+- name: Install .NET Framework 4.5.2
+  shell: ". {{ bash_profile_path }} && winetricks dotnet452"
+
+- name: Check if should install corefonts
+  shell: "(. {{ bash_profile_path }} && winetricks list-installed | grep corefonts) || echo true"
+  register: should_install_corefonts
+
+- name: Install corefonts
+  shell: ". {{ bash_profile_path }} && winetricks corefonts"

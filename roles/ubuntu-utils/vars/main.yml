@@ -1,3 +1,6 @@
+- include_vars:
+    file: "../ubuntu-base/vars/main.yml"
+
 # Google Chrome
 google_chrome_dl_url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 google_chrome_dl_destination: /tmp/google-chrome.deb
@@ -5,3 +8,10 @@ google_chrome_dl_destination: /tmp/google-chrome.deb
 # Wine
 wine_dl_url: https://dl.winehq.org/wine-builds/Release.key
 wine_ubuntu_repository: https://dl.winehq.org/wine-builds/ubuntu/
+winetricks_dl_url: https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+winetricks_path: "{{ custom_bin_dir }}/winetricks"
+
+# KeePass
+keepass_dir: "{{ custom_bin_dir }}/keepass"
+keepass_executable: "{{ custom_bin_dir }}/keepass/KeePass.exe"
+keepass_dl_url: https://datapacket.dl.sourceforge.net/project/keepass/KeePass%202.x/2.39.1/KeePass-2.39.1.zip

@@ -1,3 +1,4 @@
 bashrc_path: ~/.bashrc
 bash_profile_path: ~/.bash_profile
 bash_aliases_path: ~/.bash_aliases
+custom_bin_dir: "{{ loockup('env', 'HOME') }}/bin"

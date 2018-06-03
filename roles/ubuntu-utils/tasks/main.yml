@@ -1,5 +1,13 @@
+- name: Create programs dir
+  file:
+    path: "{{ loockup('env', 'HOME') }}/programs"
+    state: directory
+
 - include: google-chrome.yml
   tags: google-chrome
 
 - include: wine.yml
   tags: wine
+
+- include: keepass.yml
+  tags: keepass

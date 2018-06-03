@@ -1,0 +1,15 @@
+- name: Check if should download KeePass
+  stat: "{{ keepass_executable }}"
+  register: keepass_exe
+
+- name: Create KeePass dir
+  file:
+    path: "{{ keepass_dir }}"
+    state: directory
+
+- name: Download KeePass
+  unarchive:
+    src: "{{ keepass_dl_url }}"
+    dest: "{{ keepass_dir }}"
+    remote_src: true
+  when: not keepass_exe.stat.exists

@@ -15,3 +15,14 @@
       if [ -f {{ bash_profile_path }} ]; then
         . {{ bash_profile_path }}
       fi
+
+- name: Create custom bin dir
+  file:
+    path: "{{ custom_bin_dir }}"
+    state: directory
+
+- name: Add custom bin dir to $PATH
+  lineinfile:
+    line: "export PATH=$PATH:{{ custom_bin_dir }}"
+    path: "{{ bash_profile_path }}"
+    state: present
