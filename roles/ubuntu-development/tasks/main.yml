@@ -9,3 +9,6 @@
 
 - include: vim.yml
   tags: vim
+
+- include: sublime-text.yml
+  tags: sublime
