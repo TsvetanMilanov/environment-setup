@@ -1,2 +1,5 @@
 - include: google-chrome.yml
   tags: google-chrome
+
+- include: wine.yml
+  tags: wine

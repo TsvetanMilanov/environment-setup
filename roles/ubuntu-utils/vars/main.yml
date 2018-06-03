@@ -1,2 +1,7 @@
+# Google Chrome
 google_chrome_dl_url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 google_chrome_dl_destination: /tmp/google-chrome.deb
+
+# Wine
+wine_dl_url: https://dl.winehq.org/wine-builds/Release.key
+wine_ubuntu_repository: https://dl.winehq.org/wine-builds/ubuntu/

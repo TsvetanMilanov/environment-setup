@@ -1,0 +1,22 @@
+- name: Check if should install Wine
+  shell: which wine || echo true
+  register: should_install_wine
+
+- name: Add Wine key
+  apt_key:
+    url: "{{ wine_dl_url }}"
+    state: present
+  become: true
+  when: should_install_wine.stdout == 'true'
+
+- name: Add Wine repository
+  shell: "apt-add-repository {{ wine_ubuntu_repository }}"
+  become: true
+  when: should_install_wine.stdout == 'true'
+
+- name: Install Wine
+  apt:
+    name: winehq-stable
+    update_cache: true
+  become: true
+  when: should_install_wine.stdout == 'true'
