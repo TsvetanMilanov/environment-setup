@@ -1,5 +1,6 @@
 - name: Check if should download KeePass
-  stat: "{{ keepass_executable }}"
+  stat:
+    path: "{{ keepass_executable }}"
   register: keepass_exe
 
 - name: Create KeePass dir
