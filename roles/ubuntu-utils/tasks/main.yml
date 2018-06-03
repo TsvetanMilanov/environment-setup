@@ -1,6 +1,6 @@
 - name: Create programs dir
   file:
-    path: "{{ lookup('env', 'HOME') }}/programs"
+    path: "{{ custom_programs_dir }}"
     state: directory
 
 - include: google-chrome.yml
