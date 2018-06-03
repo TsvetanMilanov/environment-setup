@@ -12,3 +12,6 @@
 
 - include: sublime-text.yml
   tags: sublime
+
+- include: docker.yml
+  tags: docker

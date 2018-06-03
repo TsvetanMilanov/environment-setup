@@ -15,3 +15,6 @@ vim_bundle: "{{ vim_root }}/bundle"
 vim_autoload: "{{ vim_root }}/autoload"
 vim_autoload_pathogen_vim: "{{ vim_autoload }}/pathogen.vim"
 vim_pathogen_download_url: "https://tpo.pe/pathogen.vim"
+
+# Docker
+docker_gpg_key_url: https://download.docker.com/linux/ubuntu/gpg

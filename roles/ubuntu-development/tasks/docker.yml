@@ -1,0 +1,31 @@
+- name: Install Docker dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ca-certificates
+    - apt-transport-https
+    - software-properties-common
+  become: true
+
+- name: Add Docker GPG key
+  apt_key:
+    url: "{{ docker_gpg_key_url }}"
+    state: present
+  become: true
+
+- name: Add Docker repository
+  shell: 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
+  become: true
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    update_cache: true
+
+- name: Add user to docker group
+  user:
+    name: "{{ lookup('env', 'USER') == '' | ternary(lookup('env', 'USER'), 'root') }}"
+    groups: docker
+  become: true
+

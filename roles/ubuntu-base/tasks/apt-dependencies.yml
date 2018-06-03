@@ -19,7 +19,6 @@
     - name: tree
     - name: vim
     - name: software-properties-common
-    - name: python-software-properties
     - name: git
     - name: bash-completion
 
