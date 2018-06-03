@@ -1,6 +1,3 @@
-- include_vars:
-    file: "../ubuntu-base/vars/main.yml"
-
 # Google Chrome
 google_chrome_dl_url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 google_chrome_dl_destination: /tmp/google-chrome.deb

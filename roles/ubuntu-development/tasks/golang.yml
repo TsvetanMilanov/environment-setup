@@ -1,5 +1,5 @@
 - include_vars:
-    file: "../ubuntu-base/vars/main.yml"
+    file: "../../vars/main.yml"
 
 - name: Setup Golang apt repos
   apt_repository:

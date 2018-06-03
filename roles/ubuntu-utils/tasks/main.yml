@@ -1,6 +1,6 @@
 - name: Create programs dir
   file:
-    path: "{{ loockup('env', 'HOME') }}/programs"
+    path: "{{ lookup('env', 'HOME') }}/programs"
     state: directory
 
 - include: google-chrome.yml
