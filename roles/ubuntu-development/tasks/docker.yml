@@ -22,6 +22,7 @@
   apt:
     name: docker-ce
     update_cache: true
+  become: true
 
 - name: Add user to docker group
   user:
