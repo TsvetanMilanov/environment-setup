@@ -1,5 +1,7 @@
 # !/bin/bash
 
+set -euo pipefail
+
 function sudo_setup {
     sudo apt update && \
     sudo apt install software-properties-common -y && \
