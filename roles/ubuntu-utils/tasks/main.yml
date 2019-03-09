@@ -6,8 +6,5 @@
 - include: google-chrome.yml
   tags: google-chrome
 
-- include: wine.yml
-  tags: wine
-
-- include: keepass.yml
-  tags: keepass
+- include: keepass_xc.yml
+  tags: keepass_xc
