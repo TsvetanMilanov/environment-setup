@@ -1,2 +1,13 @@
 alias ll='ls -lah'
 alias llr='ls -tr'
+alias cdgo='cd $GOPATH/src/github.com'
+alias egp='echo "Changing GOPATH..." && export GOPATH=$PWD && pgp'
+alias egpup='echo "Changing GOPATH..." && export GOPATH=$PWD/../../.. && pgp'
+alias pgp='echo "Current GOPATH => $GOPATH"'
+alias gencert='sshcerts-linux-amd64 sign -u tmilanov -p ~/.ssh/id_rsa.pub'
+alias nis='npm i --ignore-scripts'
+alias klm='kill %1'
+alias klmf='kill -9 %'
+alias restart-ssh-agent='mv ~/.ssh ~/.ssh2 && sleep 1 && ssh-add -D; ssh-add -l; mv ~/.ssh2 ~/.ssh'
+alias mine='sudo chown -R $USER:$GROUP .'
+

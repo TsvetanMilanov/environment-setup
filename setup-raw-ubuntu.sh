@@ -6,18 +6,24 @@ function sudo_setup {
     sudo apt update && \
     sudo apt install software-properties-common -y && \
     sudo apt-add-repository ppa:ansible/ansible -y && \
+    sudo add-apt-repository universe -y && \
     sudo apt update && \
-    sudo apt install software-properties-common ansible build-essential git -y
+    sudo apt install software-properties-common sshpass ansible build-essential git -y
 }
 
 function root_setup {
     apt update && \
     apt install software-properties-common -y && \
     apt-add-repository ppa:ansible/ansible -y && \
+    sudo add-apt-repository universe -y && \
     apt update && \
-    apt install ansible build-essential git -y
+    apt install sshpass ansible build-essential git -y
 }
 
-(which sudo && sudo_setup) || root_setup
+if `which sudo &> /dev/null`; then
+    sudo_setup
+else
+    root_setup
+fi
 
 make play-ubuntu-localhost

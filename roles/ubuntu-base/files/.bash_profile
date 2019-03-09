@@ -2,11 +2,11 @@
 # Add git branch if its present to PS1
 
 # parse_git_branch() {
-	# git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \color{#fff}{.*}.∗/(\1)/'
+	# git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 # }
 
 function parse_git_branch() {
-        BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \color{#fff}{.*}.∗/\1/'`
+        BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
         if [ ! "${BRANCH}" == "" ]
         then
                 STAT=`parse_git_dirty`
