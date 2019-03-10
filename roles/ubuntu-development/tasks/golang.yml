@@ -3,13 +3,13 @@
 
 - name: Setup Golang apt repos
   apt_repository:
-    repo: ppa:gophers/archive
+    repo: ppa:longsleep/golang-backports
     state: present
   become: true
 
 - name: Install Golang
   apt:
-    name: "golang-{{ golang_version }}-go"
+    name: "golang-{{ golang_version }}"
   become: true
 
 - name: Ensure GOPATH exists
