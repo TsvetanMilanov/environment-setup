@@ -73,4 +73,3 @@ else
 fi
 export PATH=$PATH:/home/$USER/bin
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/home/$USER/Work/github.com/NativeScript/nativescript-cli/bin
